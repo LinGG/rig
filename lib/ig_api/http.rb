@@ -29,12 +29,17 @@ module IgApi
       @@obj
     end
 
-    def self.generate_uuid
-      'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.gsub(/[xy]/) do |c|
-        r = (Random.rand * 16).round | 0
-        v = c == 'x' ? r : (r & 0x3 | 0x8)
-        c.gsub(c, v.to_s(16))
-      end.downcase
+    # def self.generate_uuid
+    #   'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.gsub(/[xy]/) do |c|
+    #     r = (Random.rand * 16).round | 0
+    #     v = c == 'x' ? r : (r & 0x3 | 0x8)
+    #     c.gsub(c, v.to_s(16))
+    #   end.downcase
+    # end
+
+    def self.generate_uuid(prefix: "", suffix: "")
+      # Helper to generate UUIDs
+      "#{prefix}#{SecureRandom.uuid}#{suffix}"
     end
 
     def self.create_md5(data)
